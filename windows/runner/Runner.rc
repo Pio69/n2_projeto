@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "n2_projeto" "\0"
+            VALUE "FileDescription", "horta_inteligente" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "n2_projeto" "\0"
+            VALUE "InternalName", "horta_inteligente" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "n2_projeto.exe" "\0"
-            VALUE "ProductName", "n2_projeto" "\0"
+            VALUE "OriginalFilename", "horta_inteligente.exe" "\0"
+            VALUE "ProductName", "horta_inteligente" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

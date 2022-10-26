@@ -1,6 +1,6 @@
 {
-    "name": "n2_projeto",
-    "short_name": "n2_projeto",
+    "name": "horta_inteligente",
+    "short_name": "horta_inteligente",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
