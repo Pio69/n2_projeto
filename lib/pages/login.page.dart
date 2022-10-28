@@ -109,9 +109,8 @@ class LoginPage extends StatelessWidget {
                     backgroundColor: Color(0xFFcc0000),
                   ),
                   onPressed: () async {
-                    //Future<String?> res = _apiCall(login.text, password.text);
-                    Future<String?> res =
-                        _apiCall("user@example.com", "12345678");
+                    Future<String?> res = _apiCall(login.text, password.text);
+                    //Future<String?> res = _apiCall("user@example.com", "12345678");
                     if (await res != null) {
                       Navigator.push(
                         context,
@@ -119,6 +118,15 @@ class LoginPage extends StatelessWidget {
                           builder: (context) => TabBarDemo(),
                         ),
                       );
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              content:
+                                  const Text("Usuário ou senha incorretos!"),
+                            );
+                          });
                     }
                   },
                 ),

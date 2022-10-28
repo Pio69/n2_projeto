@@ -39,6 +39,7 @@ class TabBarDemo extends StatelessWidget {
             width: 300,
             height: 200,
           ),
+          new SizedBox(height: 15.0),
           SizedBox(
             child: TextButton(
               style: ButtonStyle(

@@ -17,13 +17,14 @@ class _DataPageState extends State<DataPage> {
         .get(Uri.parse('https://smartgarden.onlosant.com/classificados/get'));
 
     if (response.statusCode == 200) {
-      data = jsonDecode(response.body.toString())["timeSeries"];
+      data = jsonDecode(response.body.toString())["items"];
     } else {}
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('Classificados')),
       body: Column(
         children: [
           Expanded(
@@ -33,142 +34,61 @@ class _DataPageState extends State<DataPage> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Text('Loading');
                 } else {
-                  return Card(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Card(
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  title: const Text(
-                                    'Temperatura do Ar',
-                                    style: TextStyle(
-                                      fontSize: 20,
+                  return ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: Column(
+                            children: [
+                              Column(
+                                children: [
+                                  ListTile(
+                                    title: Text(
+                                      "Item",
+                                      style: TextStyle(
+                                          color: Colors.black.withOpacity(0.6)),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Icon(
-                                    Icons.device_thermostat,
-                                    color: Colors.deepOrange,
-                                    size: 35.0,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Text(
-                                    '${this.data["airSensor"][0]["value"].toString()}°C',
-                                    style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6),
-                                      fontSize: 20,
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(
+                                      (data[index]['titulo'].toString()),
+                                      style: TextStyle(
+                                          color: Colors.black.withOpacity(0.6)),
+                                      textAlign: TextAlign.left,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(
+                                      (data[index]['descricao'].toString()),
+                                      style: TextStyle(
+                                          color: Colors.black.withOpacity(0.6)),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(
+                                      "Valor: " +
+                                          (data[index]['preco'].toString()),
+                                      style: TextStyle(
+                                          color: Colors.black.withOpacity(0.6)),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(
+                                      (data[index]['createdAt'].toString()),
+                                      style: TextStyle(
+                                          color: Colors.black.withOpacity(0.6)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                          Card(
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  title: const Text(
-                                    'Umidade do Ar',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Icon(
-                                    Icons.water_drop,
-                                    color: Colors.blue,
-                                    size: 35.0,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Text(
-                                    '${this.data["humiditySensor"][0]["value"].toString()}%',
-                                    style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6),
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Card(
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  title: const Text(
-                                    'Luminosidade',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Icon(
-                                    Icons.light_mode,
-                                    color: Colors.yellow[800],
-                                    size: 35.0,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Text(
-                                    '${(double.parse(this.data["lightSensor"][0]["value"].toString()) * 100).toString()}%',
-                                    style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6),
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Card(
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  title: const Text(
-                                    'Umidade do solo',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Icon(
-                                    Icons.opacity,
-                                    color: Colors.brown,
-                                    size: 35.0,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Text(
-                                    '${this.data["soilMoistureSensor"][0]["value"].toString()}%',
-                                    style: TextStyle(
-                                      color: Colors.black.withOpacity(0.6),
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+                        );
+                      });
                 }
               },
             ),
